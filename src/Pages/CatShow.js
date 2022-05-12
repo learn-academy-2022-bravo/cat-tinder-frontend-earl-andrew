@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { NavLink } from "react-router-dom";
 
 class CatShow extends Component {
     render() {
@@ -11,6 +13,10 @@ class CatShow extends Component {
                 <p>{cat.age}</p>
                 <p>{cat.enjoys}</p>
                 <img src={cat.image} width="200px" />
+
+                <NavLink to={`/catedit/${this.props.cat.id}`}>
+                <Button>Edit Cat Profile</Button>
+                </NavLink>
             </>
         );
     }
