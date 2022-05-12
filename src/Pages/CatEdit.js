@@ -15,7 +15,7 @@ class CatEdit extends Component {
             submitted: false
           }
         }
-        
+
         handleChange = (e) => {
             let { newCat } = this.state
             newCat[e.target.name] = e.target.value
@@ -28,8 +28,10 @@ class CatEdit extends Component {
           }
 
     render() {
+        console.log(this.state);
         return (
         <>
+            <h2>Edit a Cat</h2>
             <Form>
                 <FormGroup>
                     <Label for="name">Name</Label>
@@ -38,6 +40,7 @@ class CatEdit extends Component {
                     name="name"
                     />
                 </FormGroup>
+
                 <FormGroup>
                     <Label for="age">Age</Label>
                     <Input
@@ -45,6 +48,7 @@ class CatEdit extends Component {
                     name="age"
                     />
                 </FormGroup>
+
                 <FormGroup>
                     <Label for="enjoys">Enjoys</Label>
                     <Input
@@ -52,6 +56,7 @@ class CatEdit extends Component {
                     name="enjoys"
                     />
                 </FormGroup>
+
                 <FormGroup>
                     <Label for="image">Image URL</Label>
                     <Input
