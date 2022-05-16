@@ -20,6 +20,7 @@ class CatEdit extends Component {
             let { newCat } = this.state
             newCat[e.target.name] = e.target.value
             this.setState({newCat: newCat})
+            console.log({newCat: newCat});
           }
 
         handleSubmit = () => {
@@ -66,12 +67,15 @@ class CatEdit extends Component {
                 </FormGroup>
             </Form>
 
+            
+
             <Button
                 name="submit"
                 onClick={this.handleSubmit}>
                     Edit Cat Profile
             </Button>
             {this.state.submitted && <Redirect to={`/catshow/${this.props.cat.id}`} />}
+
         </>
         );
     }

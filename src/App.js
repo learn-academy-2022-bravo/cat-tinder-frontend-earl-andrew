@@ -15,24 +15,67 @@ import CatNew from './Pages/CatNew';
 import CatEdit from './Pages/CatEdit';
 import Home from './Pages/Home';
 import NotFound from './Pages/NotFound/NotFound';
-import cats from './mockCats.js'
+
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cats: cats
+      cats: []
     }
   }
 
-  createCat = (newlyCreatedCat) => {
-    console.log(newlyCreatedCat)
+  componentDidMount () {
+    this.readCat()
   }
 
-  updateCat = (cat, id) => {
-    console.log("cat:", cat)
-    console.log("id:", id)
+  readCat= () => {
+    fetch("http://localhost:3000/cats")
+    .then(response => response.json())
+    .then(payload => this.setState({cats: payload}))
+    .catch(errors => console.log('cat read error: ', errors))
   }
+
+  createCat = (newlyCreatedCat) => {
+    fetch ("http://localhost:3000/cats", {
+      body: JSON.stringify(newlyCreatedCat),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+    .then(response => response.json())
+    .then( () => this.readCat() )
+    .catch(errors => console.log('cat create error: ', errors))
+    }
+  
+
+  updateCat = (cat, id) => {
+    fetch (`http://localhost:3000/cats/${id}`, {
+      body: JSON.stringify(cat),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "PATCH"
+    })
+      .then(response => response.json())
+      .then( () => this.readCat() )
+      .catch(errors => console.log('cat update error: ', errors))
+    }
+
+
+    deleteCat = (id) => {
+      fetch(`http://localhost:3000/cats/${id}`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "DELETE"
+      })
+      .then(response => response.json())
+      .then( () => this.readCat())
+      .catch(errors => console.log("cat delete errors:", errors))
+    }
+  
 
 
 
@@ -55,7 +98,8 @@ render() {
           render={(props) => { 
             let id= +props.match.params.id
             let cat = this.state.cats.find(catobject => catobject.id === id)
-            return <CatShow cat={cat} />
+            console.log(cat);
+            return <CatShow cat={cat} deleteCat={this.deleteCat} />
           }} 
         />
 

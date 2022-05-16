@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 class CatIndex extends Component {
     render() {
+        console.log(this.props);
         return (
             <>
             <h3>Meet the Cats!</h3>

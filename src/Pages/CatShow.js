@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { NavLink } from "react-router-dom";
+import { Alert } from 'bootstrap';
 
 class CatShow extends Component {
     render() {
@@ -8,7 +9,9 @@ class CatShow extends Component {
         return (
             <>
                 <h2>Cat Show</h2>
-
+                {this.props.cat &&
+                
+            <div>
                 <p>{cat.name}</p>
                 <p>{cat.age}</p>
                 <p>{cat.enjoys}</p>
@@ -17,6 +20,13 @@ class CatShow extends Component {
                 <NavLink to={`/catedit/${this.props.cat.id}`}>
                 <Button>Edit Cat Profile</Button>
                 </NavLink>
+
+                <NavLink to="/catindex">
+                    <Button>
+                        Delete Cat Profile
+                    </Button>
+                </NavLink>
+            </div>}
             </>
         );
     }
